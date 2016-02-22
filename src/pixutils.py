@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------
 #
 #  Copyright (C) 2012-2015 Fons Adriaensen <fons@linuxaudio.org>
-#    
+#
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 3 of the License, or
@@ -30,7 +30,7 @@ def blackorwhite (col):
     if v > 120: return QtGui.QColor (0, 0, 0)
     else:       return QtGui.QColor (255, 255, 255)
 
-    
+
 def make_widget_pixmap (sx, sy, pal):
     pm = QtGui.QPixmap (sx, sy);
     pm.fill(pal.color (pal.Window))

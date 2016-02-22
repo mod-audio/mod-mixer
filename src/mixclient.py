@@ -1,10 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # ----------------------------------------------------------------------------
 #
 #  Copyright (C) 2015 Fons Adriaensen <fons@linuxaudio.org>
-#    
+#
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 3 of the License, or
@@ -44,27 +44,27 @@ def make_styles (pal):
     global HP2style
     global K20metrics
     bgcol = pal.color (pal.Window)
-    fgcol = [ QtGui.QColor (80, 80, 80), QtGui.QColor (255, 50, 50) ]              
+    fgcol = [ QtGui.QColor (80, 80, 80), QtGui.QColor (255, 50, 50) ]
     txcol = [ QtGui.QColor (255, 255, 255), QtGui.QColor (255, 255, 255) ]
     font = QtGui.QFont("freesans", 12, QtGui.QFont.Normal)
     font.setPixelSize (12)
-    BYPstyle = ButtonStyle (ButtonBase.make_pixmap (60, 22, bgcol, fgcol, 'Bypass', txcol, font), 2)             
-    FXBstyle = ButtonStyle (ButtonBase.make_pixmap (60, 26, bgcol, fgcol, 'FX Byp', txcol, font), 2)             
-    fgcol = [ QtGui.QColor (80, 80, 80), QtGui.QColor (220, 180, 50) ]              
+    BYPstyle = ButtonStyle (ButtonBase.make_pixmap (60, 22, bgcol, fgcol, 'Bypass', txcol, font), 2)
+    FXBstyle = ButtonStyle (ButtonBase.make_pixmap (60, 26, bgcol, fgcol, 'FX Byp', txcol, font), 2)
+    fgcol = [ QtGui.QColor (80, 80, 80), QtGui.QColor (220, 180, 50) ]
     txcol = [ QtGui.QColor (255, 255, 255), QtGui.QColor (0, 0, 0) ]
-    HP1style = ButtonStyle (ButtonBase.make_pixmap (30, 16, bgcol, fgcol, 'In', txcol, font), 2)             
-    HP2style = ButtonStyle (ButtonBase.make_pixmap (30, 16, bgcol, fgcol, 'Out', txcol, font), 2)             
+    HP1style = ButtonStyle (ButtonBase.make_pixmap (30, 16, bgcol, fgcol, 'In', txcol, font), 2)
+    HP2style = ButtonStyle (ButtonBase.make_pixmap (30, 16, bgcol, fgcol, 'Out', txcol, font), 2)
     IPGcontrol.make_style (12, 1.4, pal, QtGui.QColor (255, 255, 255), QtGui.QColor (110, 110, 255))
     PGAcontrol.make_style (12, 1.5, pal, QtGui.QColor (255, 255, 255), QtGui.QColor (110, 110, 255))
     DACcontrol.make_style (12, 1.5, pal, QtGui.QColor (255, 255, 255), QtGui.QColor (220, 180, 50))
     AUXcontrol.make_style (12, 1.5, pal, QtGui.QColor (255, 255, 255), QtGui.QColor (220, 180, 50))
     K20metrics = k20metrics (bgcol, 220)
 
-    
+
 
 class Mainwin(QtGui.QMainWindow):
 
-    def __init__(self): 
+    def __init__(self):
         super (Mainwin, self).__init__()
         self.setGeometry(100, 100, 420, 270)
         self.setWindowTitle('MOD Mixer')
@@ -134,7 +134,7 @@ class Mainwin(QtGui.QMainWindow):
         lb.setText (txt)
         lb.show ()
         return lb
-       
+
     def paintEvent(self, E):
         qp = QtGui.QPainter()
         pal = self.palette ()
@@ -144,9 +144,9 @@ class Mainwin(QtGui.QMainWindow):
         qp.setBrush (QtCore.Qt.NoBrush)
         for x in (150, 300):
             qp.setPen (QtGui.QPen(pal.color (pal.Dark), 1.0))
-            qp.drawLine (x, 0.0, x, 300) 
+            qp.drawLine (x, 0.0, x, 300)
             qp.setPen (QtGui.QPen(pal.color (pal.Light), 1.0))
-            qp.drawLine (x + 1, 0.0, x + 1, 300) 
+            qp.drawLine (x + 1, 0.0, x + 1, 300)
 
     def bypass (self, butt):
         s = butt.get_state () ^ 1
@@ -155,7 +155,7 @@ class Mainwin(QtGui.QMainWindow):
         elif butt == self.bpch2:self.send (['mixer', 5, [s]])
         # !!!! INVERTED - DRIVER BUG
         elif butt == self.bpfx:self.send (['mixer', 9, [s ^ 1]])
-        
+
     def hpinp (self, butt):
         s = butt.get_state () ^ 1
         i = butt.get_index ()
@@ -163,24 +163,24 @@ class Mainwin(QtGui.QMainWindow):
         if i == 0: self.hpop.set_state (0)
         if i == 1: self.hpip.set_state (0)
         self.send_hpinp ()
-        
+
     def send_hpinp (self):
         s = self.hpop.get_state () + 2 * self.hpip.get_state ()
         self.send (['mixer', 8, [s]])
-        
+
     def ipgevent (self, ctl):
         if ctl == self.ipgctl1:
             self.send (['mixer', 2, [self.ipgctl1.get_value ()]])
         elif ctl == self.ipgctl2:
             self.send (['mixer', 3, [self.ipgctl2.get_value ()]])
-        
+
     def pgaevent (self, ctl):
         # !!!! SWAPPED - DRIVER BUG
         self.send (['mixer', 7, [self.pgactl1.get_value (), self.pgactl2.get_value ()]])
-        
+
     def dacevent (self, ctl):
         self.send (['mixer', 6, [self.dacctl2.get_value (), self.dacctl1.get_value ()]])
-        
+
     def auxevent (self, ctl):
         self.send (['mixer', 1, [self.auxctl.get_value ()]])
 
@@ -194,7 +194,7 @@ class Mainwin(QtGui.QMainWindow):
         self.pgaevent (None)
         self.send_hpinp ()
         self.send (['mixer', 9, [self.bpfx.get_state () ^ 1]]) # INVERTED
-        
+
     def send (self, mesg):
         if self.tcpch is not None:
             try:
@@ -221,7 +221,7 @@ class Mainwin(QtGui.QMainWindow):
         self.meters2.setval (0, L [2])
         self.meters2.setval (1, L [3])
         self.meters2.update ()
-                
+
     def timerEvent (self, ev):
         if self.tcpch is None:
             self.count -= 1
@@ -237,8 +237,8 @@ class Mainwin(QtGui.QMainWindow):
         else:
             self.send (['levels'])
             self.recv ()
-                   
-        
+
+
 def main():
 
     signal.signal (signal.SIGINT, signal.SIG_DFL)
@@ -261,4 +261,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()    
+    main()

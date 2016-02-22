@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------
 #
 #  Copyright (C) 2015 Fons Adriaensen <fons@linuxaudio.org>
-#    
+#
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 3 of the License, or
@@ -26,7 +26,7 @@ from rotarybase import *
 class IPGcontrol (RotaryBase):
 
     style = None
-    
+
     def __init__(self, parent):
         super (IPGcontrol, self).__init__(parent, IPGcontrol.style)
         self.set_value (0)
@@ -35,7 +35,7 @@ class IPGcontrol (RotaryBase):
         self.value = min (max (v, 0), 3)
         self.angle = 45 * (self.value + 4.5)
         self.update ()
-        
+
     def get_value (self):
         return self.value
 
@@ -44,7 +44,7 @@ class IPGcontrol (RotaryBase):
         RotaryBase.x0 = E.x()
         RotaryBase.y0 = E.y()
         RotaryBase.v0 = self.value
-        
+
     def mouseReleaseEvent (self, E):
         if E.button() == 4: return
 
@@ -54,7 +54,7 @@ class IPGcontrol (RotaryBase):
         v = RotaryBase.v0 + int (0.04 * (dx - dy))
         self.set_value (v)
         self.valueEvent.emit (self)
-        
+
     def wheelEvent (self, E):
         d = E.delta ()
         if d > 0: d = 1
@@ -63,8 +63,8 @@ class IPGcontrol (RotaryBase):
         self.set_value (v)
         self.valueEvent.emit (self)
 
-  
-    @classmethod       
+
+    @classmethod
     def make_style (cls, rad, tlw, pal, col0, col1):
         pm, qp = make_widget_pixmap (65, 45, pal)
         rx = 32.5
@@ -90,9 +90,9 @@ class IPGcontrol (RotaryBase):
         qp.drawText (-15, -17, '12')
         qp.drawText (  6, -17, '25')
         qp.drawText ( 18,  -3, '36')
-        RotaryBase.make_pixmap (qp, rad, col0, col1) 
+        RotaryBase.make_pixmap (qp, rad, col0, col1)
         bgc = blackorwhite (col1)
         cls.style = RotaryStyle (pm, rad - 2, bgc, 2.5, rx, ry)
 
 
-       
+

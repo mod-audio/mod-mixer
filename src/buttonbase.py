@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------
 #
 #  Copyright (C) 2012-2015 Fons Adriaensen <fons@linuxaudio.org>
-#    
+#
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 3 of the License, or
@@ -22,14 +22,14 @@ from PyQt4 import QtGui, QtCore
 
 
 class ButtonStyle ():
-    
+
     def __init__(self, pixmap, nstate):
         self.pixmap = pixmap
         self.nstate = nstate
         self.dx = pixmap.width ()
         self.dy = pixmap.height () // nstate
 
-        
+
 class ButtonBase (QtGui.QWidget):
 
     bpressEvent = QtCore.pyqtSignal(object)
@@ -41,7 +41,7 @@ class ButtonBase (QtGui.QWidget):
         self._style = style
         self._state = 0
         self._index = index
-        
+
     def set_state (self, s):
         s %= self._style.nstate
         s = (s << 1) | (self._state & 1)
@@ -51,20 +51,20 @@ class ButtonBase (QtGui.QWidget):
 
     def get_state (self):
         return self._state >> 1
-            
+
     def get_index (self):
         return self._index
-            
+
     def mousePressEvent (self, E):
         self._state |= 1
         self.update ()
         self.bpressEvent.emit (self)
-        
+
     def mouseReleaseEvent (self, E):
         self._state &= ~1
         self.update ()
         self.brelseEvent.emit (self)
-        
+
     def paintEvent (self, e):
         st = self._style
         pm = st.pixmap
@@ -75,18 +75,18 @@ class ButtonBase (QtGui.QWidget):
         qp.drawPixmap (d, d, pm, 0, k * st.dy, st.dx - d, st.dy - d)
         qp.end ()
 
-        
-    @classmethod    
+
+    @classmethod
     def make_pixmap (cls, sx, sy, bgcol, fgcol, texts = None, txcol = None, font = None):
         if isinstance (fgcol, (list, tuple)): nc = len (fgcol)
         else:
             fgcol = [fgcol]
             nc = 1
-        if texts is None: nt = 0               
+        if texts is None: nt = 0
         elif isinstance (texts, (list, tuple)): nt = len (texts)
         else:
             texts = [texts]
-            nt = 1             
+            nt = 1
         n = max (nc, nt)
         pm = QtGui.QPixmap (sx, n * sy);
         pm.fill (bgcol)
@@ -120,6 +120,6 @@ class ButtonBase (QtGui.QWidget):
                 qp.setPen (txcol [i % nc])
                 qp.drawText (x, y, t)
             qp.translate (0, sy)
-        qp.end ()       
+        qp.end ()
         return pm
-        
+

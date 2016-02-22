@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------
 #
 #  Copyright (C) 2012-2015 Fons Adriaensen <fons@linuxaudio.org>
-#    
+#
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 3 of the License, or
@@ -31,7 +31,7 @@ class Tcpconn ():
     by the blocking receive functions when the other side
     disconnects.
     """
-    
+
     def __init__ (self, sock):
         """
         The socket must represent an open TCP connection.
@@ -46,16 +46,16 @@ class Tcpconn ():
         h = struct.pack ("!i", len (b))
         self._sock.sendall (h)
         self._sock.sendall (b)
-            
+
     def recv_object (self):
         """
         Receive an arbitrary python object.
         """
-        b = self._rx (4)            
+        b = self._rx (4)
         n = struct.unpack ("!i", b)[0]
         b = self._rx (n)
         return pickle.loads (b)
-        
+
     def send_array (self, A):
         """
         Send the data of a numpy array without making
@@ -64,7 +64,7 @@ class Tcpconn ():
         """
         v = memoryview (A).cast ('B')
         self._sock.sendall (v)
-    
+
     def recv_array (self, A):
         """
         Receive the data of a numpy array without making
@@ -77,7 +77,7 @@ class Tcpconn ():
             if not k: raise OSError
             v = v [k:]
 
-    def _rx (self, n):    
+    def _rx (self, n):
         """
         For internal use only, replaces missing recvall().
         """
@@ -88,5 +88,5 @@ class Tcpconn ():
             if not k: raise OSError
             b += d
             n -= k
-        return b 
-    
+        return b
+

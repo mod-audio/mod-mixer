@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------
 #
 #  Copyright (C) 2015 Fons Adriaensen <fons@linuxaudio.org>
-#    
+#
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 3 of the License, or
@@ -38,7 +38,7 @@ class AUXcontrol (RotaryBase):
         self.value = v
         self.angle = (v - 7.5) / self.scale - 90.0
         self.update ()
-        
+
     def get_value (self):
         return self.value
 
@@ -47,7 +47,7 @@ class AUXcontrol (RotaryBase):
         RotaryBase.x0 = E.x()
         RotaryBase.y0 = E.y()
         RotaryBase.v0 = self.value
-        
+
     def mouseReleaseEvent (self, E):
         if E.button() == 4: return
 
@@ -57,7 +57,7 @@ class AUXcontrol (RotaryBase):
         v = int (RotaryBase.v0 + (dx - dy) // 4)
         self.set_value (v)
         self.valueEvent.emit (self)
-        
+
     def wheelEvent (self, E):
         d = E.delta ()
         if d > 0: d = 1
@@ -79,7 +79,7 @@ class AUXcontrol (RotaryBase):
         r2 = rad + 5
         pt = QtGui.QPainterPath ()
         for i in range (10):
-            a = (30 * i - 225) * pi / 180 
+            a = (30 * i - 225) * pi / 180
             c =  cos (a)
             s =  sin (a)
             pt.moveTo (c * r1, s * r1)
@@ -90,8 +90,8 @@ class AUXcontrol (RotaryBase):
         qp.setFont (ft)
         qp.drawText (-30,  18, '-33')
         qp.drawText ( 13,  18, '+12')
-        RotaryBase.make_pixmap (qp, rad, col0, col1) 
+        RotaryBase.make_pixmap (qp, rad, col0, col1)
         bgc = blackorwhite (col1)
         cls.style = RotaryStyle (pm, rad - 2, bgc, 2.5, rx, ry)
 
-        
+

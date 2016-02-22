@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------
 #
 #  Copyright (C) 2012-2015 Fons Adriaensen <fons@linuxaudio.org>
-#    
+#
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 3 of the License, or
@@ -22,7 +22,7 @@ from PyQt4 import QtGui, QtCore
 
 
 class RotaryStyle ():
-    
+
     def __init__(self, pixmap, radius, markcol, marklw, rx, ry):
         self.pixmap = pixmap
         self.radius = radius
@@ -30,7 +30,7 @@ class RotaryStyle ():
         self.marklw = marklw
         self.rx = rx
         self.ry = ry
-        
+
 
 class RotaryBase (QtGui.QWidget):
 
@@ -47,7 +47,7 @@ class RotaryBase (QtGui.QWidget):
         self.angle = 0.0
         self.resize(style.pixmap.width(), style.pixmap.height())
 
-        
+
     def paintEvent(self, e):
         qp = QtGui.QPainter()
         st = self.style
@@ -56,14 +56,14 @@ class RotaryBase (QtGui.QWidget):
         qp.setRenderHint (QtGui.QPainter.Antialiasing)
         qp.drawPixmap (0, 0, pm, 0, 0, pm.width(), pm.height() )
         qp.translate (st.rx, st.ry)
-        qp.rotate (self.angle) 
+        qp.rotate (self.angle)
         qp.setPen (QtGui.QPen(QtGui.QColor (st.markcol), st.marklw, QtCore.Qt.SolidLine))
         qp.setBrush (QtCore.Qt.NoBrush)
         qp.drawLine (2, 0, st.radius, 0)
         qp.end()
 
 
-    @classmethod    
+    @classmethod
     def make_pixmap (cls, qp, rad, col0, col1):
         qp.setPen(QtCore.Qt.NoPen)
         bl = QtGui.QColor(0, 0, 0)
@@ -78,4 +78,4 @@ class RotaryBase (QtGui.QWidget):
         qp.drawEllipse (QtCore.QPoint (0, 0), rad, rad)
 
 
-        
+

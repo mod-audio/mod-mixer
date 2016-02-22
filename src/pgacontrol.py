@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------
 #
 #  Copyright (C) 2015 Fons Adriaensen <fons@linuxaudio.org>
-#    
+#
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 3 of the License, or
@@ -37,7 +37,7 @@ class PGAcontrol (RotaryBase):
         self.value = v
         self.angle = (v - 24) / self.scale - 90.0
         self.update ()
-        
+
     def get_value (self):
         return self.value
 
@@ -46,7 +46,7 @@ class PGAcontrol (RotaryBase):
         RotaryBase.x0 = E.x()
         RotaryBase.y0 = E.y()
         RotaryBase.v0 = self.value
-        
+
     def mouseReleaseEvent (self, E):
         if E.button() == 4: return
 
@@ -56,7 +56,7 @@ class PGAcontrol (RotaryBase):
         v = int (RotaryBase.v0 + (dx - dy) // 2)
         self.set_value (v)
         self.valueEvent.emit (self)
-        
+
     def wheelEvent (self, E):
         d = E.delta ()
         if d > 0: d = 2
@@ -90,8 +90,8 @@ class PGAcontrol (RotaryBase):
         qp.drawText ( -1, -19, '0')
         qp.drawText (-30,  18, '-12')
         qp.drawText ( 13,  18, '+12')
-        RotaryBase.make_pixmap (qp, rad, col0, col1) 
+        RotaryBase.make_pixmap (qp, rad, col0, col1)
         bgc = blackorwhite (col1)
         cls.style = RotaryStyle (pm, rad - 2, bgc, 2.5, rx, ry)
 
-        
+
