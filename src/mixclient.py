@@ -153,8 +153,7 @@ class Mainwin(QtGui.QMainWindow):
         butt.set_state (s)
         if   butt == self.bpch1:self.send (['mixer', 4, [s]])
         elif butt == self.bpch2:self.send (['mixer', 5, [s]])
-        # !!!! INVERTED - DRIVER BUG
-        elif butt == self.bpfx:self.send (['mixer', 9, [s ^ 1]])
+        elif butt == self.bpfx:self.send (['mixer', 9, [s]])
 
     def hpinp (self, butt):
         s = butt.get_state () ^ 1
@@ -175,11 +174,10 @@ class Mainwin(QtGui.QMainWindow):
             self.send (['mixer', 3, [self.ipgctl2.get_value ()]])
 
     def pgaevent (self, ctl):
-        # !!!! SWAPPED - DRIVER BUG
         self.send (['mixer', 7, [self.pgactl1.get_value (), self.pgactl2.get_value ()]])
 
     def dacevent (self, ctl):
-        self.send (['mixer', 6, [self.dacctl2.get_value (), self.dacctl1.get_value ()]])
+        self.send (['mixer', 6, [self.dacctl1.get_value (), self.dacctl2.get_value ()]])
 
     def auxevent (self, ctl):
         self.send (['mixer', 1, [self.auxctl.get_value ()]])

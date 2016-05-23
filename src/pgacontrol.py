@@ -91,7 +91,7 @@ class PGAcontrol (RotaryBase):
         qp.drawText (-30,  18, '-12')
         qp.drawText ( 13,  18, '+12')
         RotaryBase.make_pixmap (qp, rad, col0, col1)
-        bgc = blackorwhite (col1)
-        cls.style = RotaryStyle (pm, rad - 2, bgc, 2.5, rx, ry)
+        col = blackorwhite (col1)
+        cls.style = RotaryStyle (pm, rad - 2, col, 2.5, rx, ry)
 
 

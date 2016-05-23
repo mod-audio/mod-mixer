@@ -91,8 +91,8 @@ class IPGcontrol (RotaryBase):
         qp.drawText (  6, -17, '25')
         qp.drawText ( 18,  -3, '36')
         RotaryBase.make_pixmap (qp, rad, col0, col1)
-        bgc = blackorwhite (col1)
-        cls.style = RotaryStyle (pm, rad - 2, bgc, 2.5, rx, ry)
+        col = blackorwhite (col1)
+        cls.style = RotaryStyle (pm, rad - 2, col, 2.5, rx, ry)
 
 
 

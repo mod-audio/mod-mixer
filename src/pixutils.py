@@ -54,9 +54,10 @@ def make_led_pixmap (pal, col0, col1):
 
 def make_leds (pal):
     global led0pm, led2pm, led3pm, led4pm, led5pm, led6pm
-    led0pm = make_led_pixmap (pal, QtGui.QColor (255, 255, 255), QtGui.QColor (130, 130, 130))
-    led2pm = make_led_pixmap (pal, QtGui.QColor (255, 255, 255), QtGui.QColor (255, 0, 0))
-    led3pm = make_led_pixmap (pal, QtGui.QColor (255, 255, 255), QtGui.QColor (255, 180, 0))
-    led4pm = make_led_pixmap (pal, QtGui.QColor (255, 255, 255), QtGui.QColor (220, 220, 0))
-    led5pm = make_led_pixmap (pal, QtGui.QColor (255, 255, 255), QtGui.QColor (0, 220, 0))
-    led6pm = make_led_pixmap (pal, QtGui.QColor (255, 255, 255), QtGui.QColor (80, 80, 255))
+    white = QtGui.QColor (255, 255, 255)
+    led0pm = make_led_pixmap (pal, white, QtGui.QColor (130, 130, 130))
+    led2pm = make_led_pixmap (pal, white, QtGui.QColor (255, 0, 0))
+    led3pm = make_led_pixmap (pal, white, QtGui.QColor (255, 180, 0))
+    led4pm = make_led_pixmap (pal, white, QtGui.QColor (220, 220, 0))
+    led5pm = make_led_pixmap (pal, white, QtGui.QColor (0, 220, 0))
+    led6pm = make_led_pixmap (pal, white, QtGui.QColor (80, 80, 255))
